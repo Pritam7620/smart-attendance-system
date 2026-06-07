@@ -11,8 +11,8 @@ let [register , setregister] = useState({
   "mobile": "",
   "rollNo": "",
   "password": "",
-  "department": "",
-   "createdAt": ""
+  "department": ""
+  
 }
 )
 
@@ -20,22 +20,34 @@ async function registerfun(){
 
   if(register.fullName.trim() ==="" || register.email.trim() ===""||register.mobile.trim()===""|| register.rollNo.trim() === "" || register.password.trim() ===""){
 alert("enter data first.....")
+return
   }
 const res = await fetch("http://localhost:4000/student/register",{
 method : "POST",
 headers : {"Content-Type":"application/json"},
 body : JSON.stringify(register)
-}
-)
+})
 const data = await res.json()
 
-if(data){
+if(res.ok){
 
   alert("register successfully")
-nav("/Log")
+nav("/")
 }else{
   alert("register unsuccessful....")
 }
+
+
+
+setregister({
+  "fullName": "",
+  "email": "",
+  "mobile": "",
+  "rollNo": "",
+  "password": "",
+  "department": ""
+   
+})
 }
 
 
@@ -44,7 +56,7 @@ nav("/Log")
       <div>
         <input type="text" placeholder='enter name' value={register.fullName} onChange={(e)=>setregister({...register, fullName: e.target.value})} /> <br /><br />
         
-        <input type="text" placeholder='enter your email' value={register.email} onChange={(e)=> setregister({
+        <input type="email" placeholder='enter your email' value={register.email} onChange={(e)=> setregister({
           ...register , email : e.target.value
         })} /> <br /><br />
 
@@ -52,13 +64,11 @@ nav("/Log")
 
 <input type="text" placeholder='enter roll' value={register.rollNo} onChange={(e)=>setregister({...register, rollNo : e.target.value})} /> <br /><br />
 
-        <input type="text" placeholder='enter password' value={register.password} onChange={(e)=>setregister({...register, password : e.target.value})} /> <br /><br />
+        <input type="password" placeholder='enter password' value={register.password} onChange={(e)=>setregister({...register, password : e.target.value})} /> <br /><br />
 
 
 
         <input type="text" placeholder='enter department' value={register.department} onChange={(e)=>setregister({...register, department : e.target.value})} /> <br /><br />
-
-<input type="text" placeholder='enter createdAt' value={register.createdAt} onChange={(e)=>setregister({...register, createdAt : e.target.value})} /> <br /><br />
 
         <button onClick={registerfun}>register</button>
       </div>
