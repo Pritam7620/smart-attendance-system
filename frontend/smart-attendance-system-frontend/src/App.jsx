@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Register from './Component/Register'
 import Home from './Component/Home'
 import Log from './Component/Log'
+import Attendance from './Component/AttendanceHistory'
 
 function App() {
  
@@ -17,6 +18,7 @@ function App() {
      <Routes>
       <Route path='/dashboard' element={<><Home/></>}></Route>
       <Route path='/' element={<Log/>}></Route>
+      <Route path='/attendancehistory' element={<><Attendance/></>}></Route>
       <Route path='/register' element={<><Register/></>}></Route>
      </Routes>
      </BrowserRouter>
